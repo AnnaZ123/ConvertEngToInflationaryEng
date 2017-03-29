@@ -1,4 +1,4 @@
 
 public class ConvertEngToInflationaryEng {
-	int i = 5;
+	int i = 4;
 }
