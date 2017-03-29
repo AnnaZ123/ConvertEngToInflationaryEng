@@ -20,8 +20,26 @@
  * 	Output: String
  * 
  * 	Algorithm:
- * 		Check if word is in dictionary.
- * 		If word is in dictionary, then inflate to next number.
+ * 		-Check if word is in dictionary.
+ * 		-If word is in dictionary, then inflate to next number.
+ * 
+ * ******
+ * 	Ideal Algorithm:
+ * 		-Find a way to phonetically check if homophone exists.
+ * 			(This way the dictionary will be smaller).
+ * 		-If homophone exists, then map word to number, and then replace.
+ * ******
+ * 
+ * Assumptions of this program:
+ * 		-Capitalization is not important
+ * 			(output is in all lower case)
+ * 		-Words or word parts do not have to be a whole syllable.
+ * 			(ex: Whole syllable, forgive -> FIVEgive
+ * 				 ! Whole syllable, waiting -> wNINEing )
+ * 		-Homophone found does not need to be smallest number first. 
+ * 			Actually, this program matches the largest number first.
+ * 			(ex:  Smallest number first, waiting -> wNINEing
+ * 				  Largest number first -> waiELEVENg )
  * 
  * */
 
@@ -47,7 +65,7 @@ public class ConvertEngToInflationaryEng {
 		
 		// dictionary of all numbers and homophones
 		//   also checked all other possible numbers:
-		//		eleven-nineteen, all multiples of ten (20, 30, etc),
+		//		eleven-nineteen, all multiples of ten (20, 30, etc) <= 90,
 		//		hundred, thousand
 		String[] myDictionary = 
 				new String[]{"zero", "xero",
@@ -163,7 +181,9 @@ public class ConvertEngToInflationaryEng {
 			"I went to the olympics and won a gold medal",
 			"Today I won an award for being awesome",
 			"The man wore a feather in his felt hat. Dispense with a vest on a day like this.",
-			"She saw a cat in the neighbor's house. Look in the corner to find the tan shirt."
+			"She saw a cat in the neighbor's house. Look in the corner to find the tan shirt.",
+			" ",
+			"Ten ate and won nine medals",
 		};
 		
 		for( int i = 0; i < examples.length; i++ )
