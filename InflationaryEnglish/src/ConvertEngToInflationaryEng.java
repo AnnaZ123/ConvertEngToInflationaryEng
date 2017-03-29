@@ -100,7 +100,7 @@ public class ConvertEngToInflationaryEng {
 		}
 		
 		//keeping this println for testing purposes
-		System.out.println(myString);
+		//System.out.println(myString);
 		return myString; 
 	}
 	
@@ -161,11 +161,17 @@ public class ConvertEngToInflationaryEng {
 	{
 		String[] examples = new String[] {
 			"I went to the olympics and won a gold medal",
-			"Today I won an award for being awesome"
+			"Today I won an award for being awesome",
+			"The man wore a feather in his felt hat. Dispense with a vest on a day like this.",
+			"She saw a cat in the neighbor's house. Look in the corner to find the tan shirt."
 		};
 		
-		convert(examples[0]);
-		convert(examples[1]);		
+		for( int i = 0; i < examples.length; i++ )
+		{
+			System.out.println("Input: " + examples[i] );
+			System.out.println("Output: " + convert(examples[i]) );
+			System.out.println();	
+		}
 	}
 	
 	
