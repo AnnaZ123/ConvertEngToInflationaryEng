@@ -1,5 +1,6 @@
 
-// Z
+
+// Z, Anna (Z) Nguyen
 // 2017 March 29
 
 /*
@@ -19,34 +20,66 @@
  * 	Output: String
  * 
  * 	Algorithm:
- * 		Check every word in string against dictionary.
+ * 		Check if word is in dictionary.
  * 		If word is in dictionary, then inflate to next number.
  * 
  * */
 
+
+/*
+ *  Sources used: 
+ *  http://www.homophone.com/search?type=include&q=two
+ *  	Used website to find all homophones of numbers
+ *  
+ *  https://lingojam.com/InflationaryEnglish
+ *  	Used website for examples and check output
+ */
 
 
 public class ConvertEngToInflationaryEng {
 	
 	public static String convert( String myString )
 	{
-		String s = ""; //comment out later
+		// assume that capitalization is not important
+		// makes comparison much easier later on
+		myString = myString.toLowerCase();
 		
-		//first, let's start with obvious.  Straight numbers
+		
+		// dictionary of all numbers and homophones
+		//   also checked all other possible numbers:
+		//		eleven-nineteen, all multiples of ten (20, 30, etc),
+		//		hundred, thousand
+		String[] myDictionary = 
+				new String[]{"zero", "xero",
+							 "one", "won", 
+							 "two", "to", "too",
+							 "three", 
+							 "four", "for", "fore",
+							 "five",
+							 "six", "sics",
+							 "seven", 
+							 "eight", "ait", "ate",
+							 "nine", 
+							 "ten", "tin"};
+		
 		//length of array needs to be precise
-		//	(remember this is not an ArrayList)
-		//last match has to have next element array to replace the word
-		String[] myDictionary = new String[6];
+		//		(remember this is not an ArrayList)
+		//size of array needs to be (all numbers with homophones) + 1
+		String[] myNumber = new String[12];
 		
-		myDictionary[0] = "zero";
-		myDictionary[1] = "one";
-		myDictionary[2] = "two";
-		myDictionary[3] = "three";
-		myDictionary[4] = "four";
-		myDictionary[5] = "five";
+		myNumber[0] = "zero";
+		myNumber[1] = "one";
+		myNumber[2] = "two";
+		myNumber[3] = "three";
+		myNumber[4] = "four";
+		myNumber[5] = "five";
+		myNumber[6] = "six";
+		myNumber[7] = "seven";
+		myNumber[8] = "eight";
+		myNumber[9] = "nine";
+		myNumber[10] = "ten";
+		myNumber[11] = "eleven";
 		
-		//Check every word in string against dictionary.
-		//	If word is in dictionary, then inflate to next number.
 		
 		//this for loop will return true every iteration if 
 		//	we start from the first number (ex: 1 -> 2 -> 3 )
@@ -54,27 +87,85 @@ public class ConvertEngToInflationaryEng {
 		
 		for( int i = myDictionary.length - 1; i >= 0; i-- )
 		{
-			//System.out.println(myDictionary[i]);
+			//if a number or homophone exists
 			if( myString.contains(myDictionary[i]) )
 			{
-				System.out.println("true!");
-				myString = myString.replaceAll(myDictionary[i], myDictionary[i+1]);
-				System.out.println(myString);
+				//find what number the word corresponds to
+				int intToUse = mapToInteger(myDictionary[i]);
+				
+				//replace the current word with the next number-word
+				myString = myString.replaceAll(myDictionary[i], 
+											   myNumber[intToUse+1]);
 			}
-			
 		}
 		
-		
-		return s; //comment out later
+		//keeping this println for testing purposes
+		System.out.println(myString);
+		return myString; 
 	}
 	
-	
+	//this method maps the word/homophone to the corresponding number
+	public static int mapToInteger( String myString )
+	{
+		int myInt = -1;
+		
+		if( myString.contains("zero") || myString.contains("xero") )
+		{
+			myInt = 0;
+		}
+		if( myString.contains("one") || myString.contains("won") )
+		{
+			myInt = 1;
+		}
+		if( myString.contains("two") || myString.contains("to") || myString.contains("too") )
+		{
+			myInt = 2;
+		}
+		if( myString.contains("three") )
+		{
+			myInt = 3;
+		}
+		if( myString.contains("four") || myString.contains("for") || myString.contains("fore") )
+		{
+			myInt = 4;
+		}
+		if( myString.contains("five") )
+		{
+			myInt = 5;
+		}
+		if( myString.contains("six") || myString.contains("sics") )
+		{
+			myInt = 6;
+		}
+		if( myString.contains("seven") )
+		{
+			myInt = 7;
+		}
+		if( myString.contains("eight") || myString.contains("ait") || myString.contains("ate") )
+		{
+			myInt = 8;
+		}
+		if( myString.contains("nine") )
+		{
+			myInt = 9;
+		}
+		if( myString.contains("ten") || myString.contains("tin") )
+		{
+			myInt = 10;
+		}
+		
+		return myInt;	
+	}
 	
 	public static void main( String[] args )
 	{
-		//convert("my one is only two but if you really want to talk about this...my four is five");
-		convert("myone is only two but if you really want to talk");
-		//convert("my one is");
+		String[] examples = new String[] {
+			"I went to the olympics and won a gold medal",
+			"Today I won an award for being awesome"
+		};
+		
+		convert(examples[0]);
+		convert(examples[1]);		
 	}
 	
 	
